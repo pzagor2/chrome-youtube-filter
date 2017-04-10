@@ -1,25 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Youtube sumscriptions filter Options</title>
+  <title>Youtube Subscription filter Options</title>
   <style>
-    body: { padding: 10px; }
+    body { 
+      padding: 10px; 
+    }
+    .box {
+      margin-bottom: 40px;
+    }
+
   </style>
 </head>
 
 <body>
-  <div id="keepTags"></div>
-  Channel Name:
-  <input type="text" name="channel" id="channel">
-  <br />
+  <div class="box">
+    <table id="all-tags">
+      <thead>
+        <tr>
+          <th>Channel name</th>
+          <th>Include Text</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <button id="clear">Delete all</button>
+  </div>
 
-  Tags:
-  <input type="text" name="tags" id="tags">
-  <br />
 
-  <button id="add">Add</button>
-  <button id="clear">Clear</button>
-  <div id="status"></div>
+
+  <div class="">
+    <div>
+      <label for="channel">Channel Name:</label>
+      <input type="text" name="channel" id="channel">
+    </div>
+    
+    <div>
+      <select id="type" disabled="disabled">
+        <option value="include">Include</option>
+        <option value="exclude">Exclude</option>
+      </select>
+      Text:
+      <input type="text" name="tags" id="tags">
+    </div>
+
+    <button id="add">Add</button>
+  </div>
+
+
   <script src="options.js"></script>
 </body>
 </html>

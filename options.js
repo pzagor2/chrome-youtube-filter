@@ -13,23 +13,35 @@ function save_options() {
 
 
     chrome.storage.sync.set(data, () => {
-    // Update status to let user know options were saved.
-        const status = document.getElementById('status');
-        status.textContent = 'Options saved.';
-        setTimeout(function() {
-            status.textContent = '';
-        }, 750);
+        //data saved
     });
     restore_options();
 }
-
+function update_tag_table() {
+    //document.getElementById('keepTags').innerHTML = JSON.stringify(data.keep);
+    const tableBody = document.querySelectorAll('#all-tags tbody')[0];
+    tableBody.innerHTML = '';
+    for (tag of data.keep) {
+        const tr = document.createElement('tr');
+        const markup = `
+            <td>
+                ${tag.channel}
+            </td>
+            <td>
+                ${tag.tag}
+            </td>
+        `;
+        tr.innerHTML = markup;
+        tableBody.appendChild(tr);
+    }
+}
 
 function restore_options() {
     chrome.storage.sync.get({
         keep: []
     }, items => {
         data = items;
-        document.getElementById('keepTags').innerHTML = JSON.stringify(data.keep);
+        update_tag_table();
     });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
