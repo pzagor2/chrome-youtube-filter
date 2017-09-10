@@ -1,8 +1,8 @@
 console.log('Start Youtube Filter EXT');
 //Helper functions
 function getDataFromGridItem(item) {
-    const user = item.querySelector('a.g-hovercard').innerText;
-    const title = item.querySelector('.yt-lockup-title').querySelector('a').innerText;
+    const user = item.querySelector('#byline a').innerText;
+    const title = item.querySelector('#video-title').innerText;
 
     const data = {
         user: user,
@@ -16,16 +16,16 @@ chrome.storage.sync.get({
     keep: []
 }, storedData => {
 
-  //Get all item into data array
-    const DOMItems = document.querySelectorAll('.yt-shelf-grid-item');
+    //Get all item into data array
+    const DOMItems = document.querySelectorAll('ytd-grid-video-renderer');
     const data = [...DOMItems].map(item => {
         return getDataFromGridItem(item);
     });
-    storedData.keep.forEach(sotedItem => {
+    storedData.keep.forEach(sortedItem => {
 
         //Filter out NBA items
         const onlyTitle = data.filter(item => {
-            if (item.user === sotedItem.channel) {
+            if (item.user === sortedItem.channel) {
                 return true;
             }
             return false;
@@ -34,7 +34,7 @@ chrome.storage.sync.get({
         //Keep only title with TOP
         const notTOP = onlyTitle.filter(item => {
             const upperTitle = item.title.toUpperCase();
-            return !upperTitle.includes(sotedItem.tag.toUpperCase());
+            return !upperTitle.includes(sortedItem.tag.toUpperCase());
         });
 
         for(const item of notTOP) {

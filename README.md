@@ -1,1 +1,1 @@
-Youtube Subscruption filer Chrome Extension
+Youtube Subscription filer Chrome Extension
