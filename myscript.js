@@ -1,8 +1,8 @@
 console.log('Start Youtube Filter EXT');
 //Helper functions
 function getDataFromGridItem(item) {
-    const user = item.querySelector('#byline a').innerText;
-    const title = item.querySelector('#video-title').innerText;
+    const user = item.querySelector('.yt-lockup-byline a').innerText;
+    const title = item.querySelector('.yt-lockup-title a').innerText;
 
     const data = {
         user: user,
@@ -17,7 +17,7 @@ chrome.storage.sync.get({
 }, storedData => {
 
     //Get all item into data array
-    const DOMItems = document.querySelectorAll('ytd-grid-video-renderer');
+    const DOMItems = document.querySelectorAll('.yt-shelf-grid-item');
     const data = [...DOMItems].map(item => {
         return getDataFromGridItem(item);
     });
